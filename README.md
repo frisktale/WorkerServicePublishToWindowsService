@@ -3,10 +3,20 @@
 ```csharp
 .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "serilogTest.txt")))
 ```
-下为部署到windows服务时，几种方法返回的路径
+下为部署到windows服务时，几种方法返回的路径  
+使用`.UseWindowsService()`
 ```
 env.ContentRootPath : D:\workspace\WorkerService1\WorkerService1\bin\Release\net6.0\publish\
 AppContext.BaseDirectory : D:\workspace\WorkerService1\WorkerService1\bin\Release\net6.0\publish\
 Directory.GetCurrentDirectory() : C:\WINDOWS\system32
 AppDomain.CurrentDomain.BaseDirectory : D:\workspace\WorkerService1\WorkerService1\bin\Release\net6.0\publish\
 ```
+不使用`.UseWindowsService()`  
+```
+env.ContentRootPath : C:\WINDOWS\system32
+AppContext.BaseDirectory : D:\workspace\WorkerService1\WorkerService1\bin\Release\net6.0\publish\
+Directory.GetCurrentDirectory() : C:\WINDOWS\system32
+AppDomain.CurrentDomain.BaseDirectory : D:\workspace\WorkerService1\WorkerService1\bin\Release\net6.0\publish\
+```
+
+不使用`.UseWindowsService()`在windows服务中无法启动
